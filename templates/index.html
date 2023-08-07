@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Önerilen Şarkılar</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="left-side">
+            <form action="/recommend" method="post">
+                <div class="input-field">
+                    <label for="playlist_id">Playlist ID:</label>
+                    <input type="text" name="playlist_id" id="playlist_id" placeholder="Playlist ID girin..." required>
+                </div>
+                <div class="input-field">
+                    <label for="limit">Limit:</label>
+                    <input type="number" name="limit" id="limit" placeholder="Limit değeri girin..." required>
+                </div>
+                <button class="button" type="submit">Önerilen Şarkılar</button>
+            </form>
+        </div>
+        <div class="right-side">
+            {% if recommended_songs %}
+            <div class="recommended-songs" id="recommended-songs">
+                <h2>Önerilen Şarkılar:</h2>
+                <ul>
+                    {% for song in recommended_songs %}
+                    <li>
+                        <div class="song-container">
+                            <a href="{{ song.info }}" target="_blank">
+                                <img src="{{ song.photo }}" alt="{{ song.name }}">
+                                <div class="song-name">{{ song.name }}</div>
+                            </a>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
